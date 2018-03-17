@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>GibberishAES Decoder</title>
+</head>
+    <center>
+<body>
+    <h1>GibberishAES Decoder</h1>
+
+
+    <table id="table">
+        <tr>
+            <td>Encrypted key:</td>
+            <td><textarea id="text" /></textarea></td>
+        </tr>
+        <tr>
+            <td>Dictionary files:</td>
+            <td><input type="file" id="files" name="files[]" multiple /></td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+                <button id="buttonStart">Decrypt</button>
+            </td>
+        </tr>
+    </table>
+
+    <table id="results" cellpadding="10">
+            <tbody>
+            </tbody>
+    </table>
+
+    <script type="text/javascript" src="jquery-1.2.6.js"></script>
+    <script type="text/javascript" src="gibberish-aes-1.0.0.js"></script>
+
+    <script>
+      // keep the list of the web workers
+      const workers = [];
+
+      $(document).ready(function() {
+        $('#buttonStart').click(function() {
+            $('#results tr').remove();
+
+            // stop all running workers
+            while (workers.length > 0) {
+                const worker = workers.pop();
+                worker.terminate();
+            }
+
+            // key
+            const encrypted_key = $('#text').val();
+            // password dictionaries
+            const files = $('#files')[0].files;
+
+            let worker_id = 0;
+            for (const file of files) {
+                $('#results tbody').append(`<tr><td>${file.name}</td><td id=t${worker_id}>waiting...</td><td id=p${worker_id}>--</td></tr>`);
+                worker = new Worker('reader.js');
+                worker.postMessage([worker_id, encrypted_key, file]);
+                worker.onmessage = function(e) {
+                    const worker_id = e.data[0];
+                    const finished = e.data[1];
+                    const msg = e.data[2];
+
+                    if (finished) {
+                        $('#p'+worker_id).html(msg);
+                    } else {
+                        $('#t'+worker_id).html(msg);
+                    }
+                }
+                workers.push(worker);
+                worker_id++;
+            }
+            
+            ;          
+        });
+
+
+      });
+
+
+    </script>
+
+</body>
+</html>
