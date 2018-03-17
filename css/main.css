@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+html, body {
+    min-height: 100%;
+    width: 100%;
+}
+header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+body {
+    background-color: #fdfdfd;
+    font-size: 18px;
+    line-height: 1.5em;
+}
+#decryptionForm {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+#decryptionForm label {
+    float: left;
+    display: block;
+    font-size: 1.2em;
+}
+#decryptionForm div {
+    margin-bottom: 30px;
+    width: 100%;
+}
+#decryptionForm button {
+    font-size: 1.2em;
+    padding: 5px 35px;
+    background-color: #1e1e1e38;
+}
+div > button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#results {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+#results td {
+    width: 33%;
+}
+.found {
+    color: #5cb85c;
+    font-weight: bold;
+}
+.not-found {
+    color: #d9534f;
+    font-weight: bold;
+}

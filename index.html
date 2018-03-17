@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>GibberishAES Decrypter</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <header>
+        <h1>GibberishAES Decrypter</h1>
+    </header>
+    <main>
+        <form id="decryptionForm">
+            <div class="form-control">
+                <label for="text">Encrypted string:</label>
+                <textarea id="text" rows="10" cols="30" autofocus required></textarea>
+            </div>
+            <div class="form-control">
+                <label for="files">Select dictionaries:</label>
+                <input type="file" id="files" name="files[]" multiple required>
+            </div>
+            <div>
+                <button>Decrypt</button>
+            </div>
+        </form>
+    </main>
+
+    <table id="results">
+        <tbody>
+    </table>
+
+    <script type="text/javascript" src="js/jquery-1.2.6.js"></script>
+    <script type="text/javascript" src="js/gibberish-aes-1.0.0.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html>
